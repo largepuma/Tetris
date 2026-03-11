@@ -1,0 +1,29 @@
+[project]
+name = "tetris-ai"
+version = "0.1.0"
+description = "Tetris AI player using Visual Parsing + DQN + Action Mapping"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24.0",
+    "torch>=2.0.0",
+]
+
+[project.scripts]
+tetris-ai = "main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+# Use the PyTorch CPU-only index to avoid pulling the large CUDA build
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

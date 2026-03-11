@@ -42,28 +42,46 @@ Maps between the agent's discrete action space and game mechanics:
 - Provides valid action masks per game state
 - Bidirectional mapping (action ↔ game move)
 
+## Installation
+
+Requires [uv](https://docs.astral.sh/uv/).
+
+```bash
+uv sync
+```
+
+This installs all dependencies (NumPy, PyTorch) into an isolated virtual environment.
+
 ## Usage
+
+Run commands via `uv run` (no manual activation needed):
 
 ### Demo (no PyTorch required)
 ```bash
-python main.py demo --games 10 --visual
+uv run main.py demo --games 10 --visual
 ```
 
 ### Train the RL Agent
 ```bash
 # Compact mode (faster training)
-python main.py train --episodes 5000 --mode compact
+uv run main.py train --episodes 5000 --mode compact
 
 # CNN mode (learns spatial features)
-python main.py train --episodes 10000 --mode cnn
+uv run main.py train --episodes 10000 --mode cnn
 
 # Resume training
-python main.py train --resume checkpoints/checkpoint_2000.pt
+uv run main.py train --resume checkpoints/checkpoint_2000.pt
 ```
 
 ### Watch Trained Agent Play
 ```bash
-python main.py play --model checkpoints/best_model.pt --speed 0.2
+uv run main.py play --model checkpoints/best_model.pt --speed 0.2
+```
+
+Alternatively, activate the venv manually:
+```bash
+source .venv/bin/activate
+python main.py demo
 ```
 
 ## Files
@@ -80,5 +98,6 @@ python main.py play --model checkpoints/best_model.pt --speed 0.2
 ## Requirements
 
 - Python 3.10+
-- NumPy
-- PyTorch (for training/playing with RL agent; demo mode works without it)
+- [uv](https://docs.astral.sh/uv/) — dependency management
+- NumPy ≥ 1.24
+- PyTorch ≥ 2.0 (for training/playing with RL agent; demo mode works without it)
